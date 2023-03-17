@@ -28,8 +28,8 @@ jobs:
         working-directory: src
         run: |
           mkdir package
-          pip install -r requirements.txt --target ./package
-          zip -r lambda.zip package *.py
+          pip install -r requirements.txt --target .
+          zip -r lambda.zip .
 
       - name: Update Lambda code
         working-directory: src

@@ -35,7 +35,6 @@ def lambda_handler(event, context):
     if type(params) == str:
         params = json.loads(event.get('body'))
 
-    print(params)
     action = params['action']
     text = params['text']
 
@@ -50,5 +49,5 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps(response)
+        'body': json.dumps({ 'response': response })
     }

@@ -31,9 +31,13 @@ def summarize_conversation(text):
     return summary
 
 def lambda_handler(event, context):
-    print('event', event)
-    action = event['action']
-    text = event['text']
+    params = event.get('body')
+    if type(params) == str:
+        params = json.loads(event.get('body'))
+
+    print(params)
+    action = params['action']
+    text = params['text']
 
     if action == 'expand':
         response = expand_text(text)

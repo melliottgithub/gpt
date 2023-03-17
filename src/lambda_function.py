@@ -6,7 +6,7 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 
 def generate_chat_gpt4_response(prompt):
     response = openai.Completion.create(
-        engine="gpt-3.5-turbo",
+        engine="text-davinci-003",
         prompt=prompt,
         max_tokens=150,
         n=1,

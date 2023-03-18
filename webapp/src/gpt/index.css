@@ -1,0 +1,42 @@
+/* Default styles for the form */
+.gpt-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    max-width: 800px; /* Set a maximum width for the form */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 0 32px; /* Add some horizontal padding to the form */
+  }
+  
+  /* Styles for large screens (1024px - 1439px) */
+  @media screen and (min-width: 1024px) and (max-width: 1439px) {
+    .gpt-form {
+      max-width: 80%; /* Reduce the maximum width of the form */
+      padding: 0 24px; /* Add some horizontal padding to the form */
+    }
+  }
+  
+  /* Styles for tablet screens (768px - 1023px) */
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .gpt-form {
+      max-width: 90%; /* Reduce the maximum width of the form */
+      padding: 0 16px; /* Add some horizontal padding to the form */
+    }
+  }
+  
+  /* Styles for mobile landscape (481px - 767px) */
+  @media screen and (min-width: 481px) and (max-width: 767px) {
+    .gpt-form {
+      max-width: 100%; /* Set the maximum width of the form to 100% */
+      padding: 0 8px; /* Add some horizontal padding to the form */
+    }
+  }
+  
+  /* Styles for mobile screens (up to 480px) */
+  @media screen and (max-width: 480px) {
+    .gpt-form {
+      max-width: 100%; /* Set the maximum width of the form to 100% */
+      padding: 0 4px; /* Add some horizontal padding to the form */
+    }
+  }
+  

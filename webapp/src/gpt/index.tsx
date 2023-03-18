@@ -5,6 +5,7 @@ import Button from "../widgets/button";
 import Flex from "../widgets/flex";
 import Multiline from "../widgets/multiline";
 import Select from "../widgets/select";
+import "./index.css";
 
 const GptForm = () => {
   const [isRunning, setRunning] = useState(false);
@@ -66,7 +67,7 @@ const GptForm = () => {
   ];
 
   return (
-    <form>
+    <form className="gpt-form">
       <Flex className="" flexDirection="column" rowGap="8px">
         <label className="font-size-small">Action</label>
         <Select

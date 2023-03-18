@@ -3,6 +3,8 @@ name: Website build/deploy job
 on:
   push:
     branches: [main]
+    paths:
+      - 'webapp/**'
 
 jobs:
   build:

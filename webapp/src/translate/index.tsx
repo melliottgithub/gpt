@@ -30,7 +30,6 @@ const TranslateForm = () => {
           ...formData,
           engine,
         } as TranslationRequest).then((response) => {
-          console.log(engine, response);
           const engineName = engines[engine];
           return {[engineName]: response.translated_text};
         })
@@ -47,7 +46,6 @@ const TranslateForm = () => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>) => {
     const fieldName = event.target.name as keyof TranslationRequest;
     const value = event.target.value;
-    console.log(fieldName, value);
     setTranslatedText(null);
     setFormData((prevData) => ({
       ...prevData,

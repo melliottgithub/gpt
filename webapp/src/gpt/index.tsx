@@ -31,7 +31,6 @@ const GptForm = () => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>) => {
     const fieldName = event.target.name as keyof GptRequest;
     const value = event.target.value;
-    console.log(fieldName, value);
     setResponseText(null);
     setFormData((prevData) => ({
       ...prevData,

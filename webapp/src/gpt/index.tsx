@@ -57,12 +57,12 @@ const GptForm = () => {
   };
 
   const featureOptions = [
-    { label: "Fix Grammar", value: "fix" },
-    { label: "Expand Text", value: "expand" },
-    { label: "Summarize", value: "summarize" },
-    { label: "Sentiment Analysis", value: "sentiment" },
     { label: "Classify Text", value: "classify" },
+    { label: "Expand Text", value: "expand" },
     { label: "Extract Keywords", value: "keywords" },
+    { label: "Fix Grammar", value: "fix" },
+    { label: "Sentiment Analysis", value: "sentiment" },
+    { label: "Summarize", value: "summarize" },
   ];
 
   return (

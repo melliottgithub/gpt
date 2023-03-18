@@ -50,6 +50,30 @@ def summarize_conversation(text):
     summary = generate_chat_gpt4_response(prompt)
     return summary
 
+# Perform sentiment analysis on a given text
+
+
+def analyze_sentiment(text):
+    prompt = f"Analyze the sentiment of the following text and classify it as positive, negative, or neutral: '{text}'"
+    sentiment = generate_chat_gpt4_response(prompt)
+    return sentiment
+
+# Classify a given text into a predefined category
+
+
+def classify_text(text):
+    prompt = f"Classify the following text into a category: '{text}'"
+    category = generate_chat_gpt4_response(prompt)
+    return category
+
+# Extract keywords from a given text
+
+
+def extract_keywords(text):
+    prompt = f"Extract the main keywords from the following text: '{text}'"
+    keywords = generate_chat_gpt4_response(prompt)
+    return keywords
+
 # Handle the Lambda function event
 
 
@@ -68,7 +92,9 @@ def lambda_handler(event, context):
             }
 
         # Check if the action parameter is valid
-        if action not in ['expand', 'fix', 'summarize']:
+        valid_actions = ['expand', 'fix', 'summarize',
+                         'sentiment', 'classify', 'keywords']
+        if action not in valid_actions:
             return {
                 'statusCode': 400,
                 'body': json.dumps({'error': 'Invalid action'})
@@ -81,6 +107,12 @@ def lambda_handler(event, context):
             response = fix_spelling(text)
         elif action == 'summarize':
             response = summarize_conversation(text)
+        elif action == 'sentiment':
+            response = analyze_sentiment(text)
+        elif action == 'classify':
+            response = classify_text(text)
+        elif action == 'keywords':
+            response = extract_keywords(text)
 
         # Return the response in a JSON format
         return {

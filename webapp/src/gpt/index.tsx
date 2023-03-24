@@ -114,17 +114,6 @@ const GptForm = () => {
           <div className="p-xxsmall border border-thin border-primary border-radius-small m-small-top">
             <div className="text-2xl">{responseText}</div>
           </div>
-        </Flex>
-      )}
-      {responseText != null && (
-        <Flex
-          className="m-xxsmall m-xsmall-top"
-          flexDirection="column"
-          rowGap="12px"
-        >
-          <div className="p-xxsmall border border-thin border-primary border-radius-small m-small-top">
-            <div className="text-2xl">{responseText}</div>
-          </div>
           <Button type="button" variant="secondary" onClick={copyToClipboard}>
             Copy
           </Button>

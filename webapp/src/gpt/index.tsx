@@ -57,6 +57,17 @@ const GptForm = () => {
     }
   };
 
+  const copyToClipboard = () => {
+    if (responseText) {
+      const textarea = document.createElement("textarea");
+      textarea.textContent = responseText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+  };
+
   const featureOptions = [
     { label: "Classify Text", value: "classify" },
     { label: "Expand Text", value: "expand" },
@@ -103,6 +114,20 @@ const GptForm = () => {
           <div className="p-xxsmall border border-thin border-primary border-radius-small m-small-top">
             <div className="text-2xl">{responseText}</div>
           </div>
+        </Flex>
+      )}
+      {responseText != null && (
+        <Flex
+          className="m-xxsmall m-xsmall-top"
+          flexDirection="column"
+          rowGap="12px"
+        >
+          <div className="p-xxsmall border border-thin border-primary border-radius-small m-small-top">
+            <div className="text-2xl">{responseText}</div>
+          </div>
+          <Button type="button" variant="secondary" onClick={copyToClipboard}>
+            Copy
+          </Button>
         </Flex>
       )}
     </form>

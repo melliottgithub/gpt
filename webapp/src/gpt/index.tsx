@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Service from "../services";
 import { GptRequest } from "../services/types";
 import Button from "../widgets/button";
@@ -9,7 +9,7 @@ import "./index.css";
 
 const GptForm = () => {
   const [isRunning, setRunning] = useState(false);
-  const [hasCopied, setHasCopied] = useState(false);
+  const [copyMessage, setCopyMessage] = useState<string | null>(null);
   const [responseText, setResponseText] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<GptRequest>>({
     text: "",
@@ -58,28 +58,18 @@ const GptForm = () => {
     }
   };
 
-  const copyText = () => {
-    if (responseText) {
-      navigator.clipboard.writeText(responseText).then(
-        () => {
-          setHasCopied(true);
-        },
-        (error) => {
-          console.error("Could not copy text: ", error);
-        }
-      );
-    }
+  const handleCopy = () => {
+    const textArea = document.createElement("textarea");
+    textArea.value = responseText || "";
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    setCopyMessage("Copied to clipboard!");
+    setTimeout(() => {
+      setCopyMessage(null);
+    }, 2000);
   };
-
-  useEffect(() => {
-    if (hasCopied) {
-      const timer = setTimeout(() => {
-        setHasCopied(false);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [hasCopied]);
 
   const featureOptions = [
     { label: "Classify Text", value: "classify" },
@@ -127,12 +117,10 @@ const GptForm = () => {
           <div className="p-xxsmall border border-thin border-primary border-radius-small m-small-top">
             <div className="text-2xl">{responseText}</div>
           </div>
-          <Button type="button" variant="secondary" onClick={copyText}>
+          <Button variant="secondary" onClick={handleCopy}>
             Copy
           </Button>
-          {hasCopied && (
-            <div className="text-success">Text has been copied!</div>
-          )}
+          {copyMessage && <div className="copy-message">{copyMessage}</div>}
         </Flex>
       )}
     </form>

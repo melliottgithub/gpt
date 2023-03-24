@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Service from "../services";
 import { GptRequest } from "../services/types";
 import Button from "../widgets/button";
@@ -9,6 +9,7 @@ import "./index.css";
 
 const GptForm = () => {
   const [isRunning, setRunning] = useState(false);
+  const [hasCopied, setHasCopied] = useState(false);
   const [responseText, setResponseText] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<GptRequest>>({
     text: "",
@@ -57,16 +58,28 @@ const GptForm = () => {
     }
   };
 
-  const copyToClipboard = () => {
+  const copyText = () => {
     if (responseText) {
-      const textarea = document.createElement("textarea");
-      textarea.textContent = responseText;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
+      navigator.clipboard.writeText(responseText).then(
+        () => {
+          setHasCopied(true);
+        },
+        (error) => {
+          console.error("Could not copy text: ", error);
+        }
+      );
     }
   };
+
+  useEffect(() => {
+    if (hasCopied) {
+      const timer = setTimeout(() => {
+        setHasCopied(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasCopied]);
 
   const featureOptions = [
     { label: "Classify Text", value: "classify" },
@@ -114,9 +127,12 @@ const GptForm = () => {
           <div className="p-xxsmall border border-thin border-primary border-radius-small m-small-top">
             <div className="text-2xl">{responseText}</div>
           </div>
-          <Button type="button" variant="secondary" onClick={copyToClipboard}>
+          <Button type="button" variant="secondary" onClick={copyText}>
             Copy
           </Button>
+          {hasCopied && (
+            <div className="text-success">Text has been copied!</div>
+          )}
         </Flex>
       )}
     </form>

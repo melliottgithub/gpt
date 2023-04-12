@@ -34,11 +34,11 @@ def expand_text(text):
     expanded_text = generate_chat_gpt4_response(prompt)
     return expanded_text
 
-# Fix spelling mistakes in a text
+# Fix grammar
 
 
 def fix_spelling(text):
-    prompt = f"Fix the spelling mistakes in the following text: '{text}'"
+    prompt = f"Fix grammar: '{text}'"
     fixed_text = generate_chat_gpt4_response(prompt)
     return fixed_text
 

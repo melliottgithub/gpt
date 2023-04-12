@@ -38,7 +38,7 @@ def expand_text(text):
 
 
 def fix_spelling(text):
-    prompt = f"Fix grammar: '{text}'"
+    prompt = f"Fix grammar and indicate the changes made: '{text}'"
     fixed_text = generate_chat_gpt4_response(prompt)
     return fixed_text
 

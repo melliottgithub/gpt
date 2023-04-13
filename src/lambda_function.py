@@ -28,7 +28,7 @@ def expand_text(text):
 
 
 def fix_grammar(text):
-    prompt = f"Correct any grammar errors in the text below and provide the revised version:\n\nOriginal text: {text}\n"
+    prompt = f"Correct any grammar errors in the text below and provide the revised version: {text}\n"
     return generate_chat_gpt4_response(prompt)
 
 
